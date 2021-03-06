@@ -1,0 +1,101 @@
+#pragma METAINFO("Cecil Kilmer", 1, 0, "Turbo Buttons")
+
+#include <xb1.gph>
+
+int turboDelay = 100;
+
+int turboA = 0;
+int turboB = 0;
+int turboX = 0; 
+int turboY = 0;
+
+int turboALatch = 0;
+int turboBLatch = 0;
+int turboXLatch = 0;
+int turboYLatch = 0;
+
+main
+{
+	// A button toggle
+	if (!turboALatch && check_active(XB1_A, 1000))
+	{
+		turboALatch = !turboALatch;
+		turboA = !turboA;
+	}
+	else if (turboALatch && check_release(XB1_A, 500))
+	{
+		turboALatch = !turboALatch;
+	}
+
+	// B button toggle
+	if (!turboBLatch && check_active(XB1_B, 1000))
+	{
+		turboBLatch = !turboBLatch;
+		turboB = !turboB;
+	}
+	else if (turboBLatch && check_release(XB1_B, 500))
+	{
+		turboBLatch = !turboBLatch;
+	}
+
+	// X button toggle
+	if (!turboXLatch && check_active(XB1_X, 1000))
+	{
+		turboXLatch = !turboXLatch;
+		turboX = !turboX;
+	}
+	else if (turboXLatch && check_release(XB1_X, 500))
+	{
+		turboXLatch = !turboXLatch;
+	}
+
+	// Y button toggle
+	if (!turboYLatch && check_active(XB1_Y, 1000))
+	{
+		turboYLatch = !turboYLatch;
+		turboY = !turboY;
+	}
+	else if (turboYLatch && check_release(XB1_Y, 500))
+	{
+		turboYLatch = !turboYLatch;
+	}
+	
+	// Run the turbos!
+	if (turboA) { combo_run(TurboA); } else { combo_stop(TurboA); }
+	if (turboB) { combo_run(TurboB); } else { combo_stop(TurboB); }
+	if (turboX) { combo_run(TurboX); } else { combo_stop(TurboX); }
+	if (turboY) { combo_run(TurboY); } else { combo_stop(TurboY); }
+
+}
+
+combo TurboA
+{
+	set_val(XB1_A, 100);
+	wait(turboDelay);
+	set_val(XB1_A, 0);
+	wait(turboDelay);
+}
+
+combo TurboB
+{
+	set_val(XB1_B, 100);
+	wait(turboDelay);
+	set_val(XB1_B, 0);
+	wait(turboDelay);
+}
+
+combo TurboX
+{
+	set_val(XB1_X, 100);
+	wait(turboDelay);
+	set_val(XB1_X, 0);
+	wait(turboDelay);
+}
+
+combo TurboY
+{
+	set_val(XB1_Y, 100);
+	wait(turboDelay);
+	set_val(XB1_Y, 0);
+	wait(turboDelay);
+}
