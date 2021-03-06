@@ -2,7 +2,7 @@
 
 #include <xb1.gph>
 
-int turboDelay = 100;
+int turboDelay = 25;
 
 bool turboA = FALSE;
 bool turboB = FALSE;

@@ -1,0 +1,11 @@
+#pragma METAINFO("Overcooked 2 - 1-1", 1, 0, "Cecil Kilmer")
+
+#include <xb1.gph>
+
+bool active = FALSE;
+
+main 
+{
+	if (get_val(XB1_X)) { active = !active; }
+	if (active) { macro_run("OC211.gmk"); } else { macro_stop(); }
+}
