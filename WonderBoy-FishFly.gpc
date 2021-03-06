@@ -1,0 +1,28 @@
+#pragma METAINFO("Wonder Boy: The Dragon Trap - Fish Fly", 1, 1, "Cecil Kilmer")
+
+#include <xb1.gph>
+
+int turboDelay = 50;
+
+bool turbo = FALSE;
+
+main
+{
+	if (get_val(XB1_DOWN))
+	{
+		turbo = !turbo;
+	}
+
+	// Run the turbos!
+	if (turbo) { combo_run(FlyFishFly); } else { combo_stop(FlyFishFly); }
+}
+
+combo FlyFishFly
+{
+	set_val(XB1_RIGHT, 100);
+	wait(turboDelay);
+	set_val(XB1_RIGHT, 0);
+	set_val(XB1_LEFT, 100);
+	wait(turboDelay);
+	set_val(XB1_LEFT, 0);
+}

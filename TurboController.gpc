@@ -1,18 +1,22 @@
-#pragma METAINFO("Cecil Kilmer", 1, 0, "Turbo Buttons")
+#pragma METAINFO("Turbo Controller", 1, 1, "Cecil Kilmer")
 
 #include <xb1.gph>
 
 int turboDelay = 100;
 
-int turboA = 0;
-int turboB = 0;
-int turboX = 0; 
-int turboY = 0;
+bool turboA = FALSE;
+bool turboB = FALSE;
+bool turboX = FALSE; 
+bool turboY = FALSE;
+bool turboLB = FALSE;
+bool turboRB = FALSE;
 
-int turboALatch = 0;
-int turboBLatch = 0;
-int turboXLatch = 0;
-int turboYLatch = 0;
+bool turboALatch = FALSE;
+bool turboBLatch = FALSE;
+bool turboXLatch = FALSE;
+bool turboYLatch = FALSE;
+bool turboLBLatch = FALSE;
+bool turboRBLatch = FALSE;
 
 main
 {
@@ -60,12 +64,35 @@ main
 		turboYLatch = !turboYLatch;
 	}
 	
+	// LB button toggle
+	if (!turboLBLatch && check_active(XB1_LB, 1000))
+	{
+		turboLBLatch = !turboLBLatch;
+		turboLB = !turboLB;
+	}
+	else if (turboLBLatch && check_release(XB1_LB, 500))
+	{
+		turboLBLatch = !turboLBLatch;
+	}
+
+	// RB button toggle
+	if (!turboRBLatch && check_active(XB1_RB, 1000))
+	{
+		turboRBLatch = !turboRBLatch;
+		turboRB = !turboRB;
+	}
+	else if (turboRBLatch && check_release(XB1_RB, 500))
+	{
+		turboRBLatch = !turboRBLatch;
+	}
+
 	// Run the turbos!
 	if (turboA) { combo_run(TurboA); } else { combo_stop(TurboA); }
 	if (turboB) { combo_run(TurboB); } else { combo_stop(TurboB); }
 	if (turboX) { combo_run(TurboX); } else { combo_stop(TurboX); }
 	if (turboY) { combo_run(TurboY); } else { combo_stop(TurboY); }
-
+	if (turboLB) { combo_run(TurboLB); } else { combo_stop(TurboLB); }
+	if (turboRB) { combo_run(TurboRB); } else { combo_stop(TurboRB); }
 }
 
 combo TurboA
@@ -99,3 +126,20 @@ combo TurboY
 	set_val(XB1_Y, 0);
 	wait(turboDelay);
 }
+
+combo TurboLB
+{
+	set_val(XB1_LB, 100);
+	wait(turboDelay);
+	set_val(XB1_LB, 0);
+	wait(turboDelay);
+}
+
+combo TurboRB
+{
+	set_val(XB1_RB, 100);
+	wait(turboDelay);
+	set_val(XB1_RB, 0);
+	wait(turboDelay);
+}
+
